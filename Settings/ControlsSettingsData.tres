@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b1k0yq3hfd3ve"]
+
+[ext_resource type="Script" path="res://Scripts/Settings/ControlsSettingsData.cs" id="1_rodhd"]
+
+[resource]
+script = ExtResource("1_rodhd")
+MouseSensitivity = 20.0

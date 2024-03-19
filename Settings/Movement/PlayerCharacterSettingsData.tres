@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c6xnbkembpm0w"]
+
+[ext_resource type="Script" path="res://Scripts/Settings/CharacterSettingsData.cs" id="1_sx03t"]
+
+[resource]
+script = ExtResource("1_sx03t")
+BaseHeight = 2.0
+BaseSpeed = 5.0
+MovementSmoothInterpolation = 12.0
+BaseJumpVelocity = 6.2
+GravityPower = 1.3
+HeadOffsetPercent = 0.2
+HeadAdjustSmooth = 28.0
+CrouchMoveSpeedMultiplier = 0.4
+CrouchHeightCastOffset = 0.35
+BaseCrouchHeight = 1.0
+MinCrouchHeight = 0.6
+ClimbCompletionDistanceCheck = 0.2
+ClimbCheckRayLength = 1.3
+ClimbMaxTime = 1.0
+ClimbLerpSmooth = 8.0
+StepHeight = 0.3

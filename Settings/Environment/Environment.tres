@@ -1,0 +1,9 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://cuxa0fxdes3sl"]
+
+[ext_resource type="Material" uid="uid://8ta0a5fxp3st" path="res://Materials/PhysicalSkyMaterial.tres" id="1_ue4rn"]
+
+[sub_resource type="Sky" id="Sky_adrgl"]
+sky_material = ExtResource("1_ue4rn")
+
+[resource]
+sky = SubResource("Sky_adrgl")

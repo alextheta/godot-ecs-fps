@@ -1,0 +1,9 @@
+[submodule "Dependencies/ecslite"]
+	path = Dependencies/ecslite
+	url = git@github.com:Leopotam/ecslite.git
+[submodule "Dependencies/tenject"]
+	path = Dependencies/tenject
+	url = git@github.com:alextheta/tenject.git
+[submodule "Dependencies/ecs-feature-runner"]
+	path = Dependencies/ecs-feature-runner
+	url = git@github.com:alextheta/ecs-feature-runner.git

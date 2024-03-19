@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://wvanqfcwrsk0"]
+
+[ext_resource type="Resource" uid="uid://b1k0yq3hfd3ve" path="res://Settings/ControlsSettingsData.tres" id="1_0inip"]
+[ext_resource type="Script" path="res://Scripts/Settings/SettingsDatabase.cs" id="1_nwks8"]
+
+[resource]
+script = ExtResource("1_nwks8")
+ControlsSettings = ExtResource("1_0inip")

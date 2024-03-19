@@ -1,0 +1,518 @@
+[gd_scene load_steps=11 format=3 uid="uid://mg7awsujyl5n"]
+
+[ext_resource type="Script" path="res://Scripts/Service.cs" id="1_3eklc"]
+[ext_resource type="Script" path="res://Scripts/Features/InputFeature/Nodes/InputEventProvider.cs" id="1_w3pdx"]
+[ext_resource type="Script" path="res://Scripts/Common/Godot/EcsWorldProvider.cs" id="2_osu0f"]
+[ext_resource type="Resource" uid="uid://wvanqfcwrsk0" path="res://Settings/SettingsDatabase.tres" id="4_hqr6m"]
+[ext_resource type="Environment" uid="uid://cuxa0fxdes3sl" path="res://Settings/Environment/Environment.tres" id="5_cpnmq"]
+[ext_resource type="Material" uid="uid://dytplpc2kiyqo" path="res://Materials/Proto/White.tres" id="7_ivpoi"]
+[ext_resource type="Material" uid="uid://b0lpumxem8xbn" path="res://Materials/Proto/Green.tres" id="7_ll5xf"]
+[ext_resource type="Material" uid="uid://dph0s4ywmyfjk" path="res://Materials/Proto/Purple.tres" id="8_sn7im"]
+[ext_resource type="PackedScene" uid="uid://b01k0j3dqk18j" path="res://Prefabs/PlayerSpawnPoint.tscn" id="9_t6m6a"]
+[ext_resource type="Material" uid="uid://cn3vgiyddisai" path="res://Materials/Proto/Orange.tres" id="10_jgmh8"]
+
+[node name="Root" type="Node3D"]
+
+[node name="Service" type="Node" parent="."]
+script = ExtResource("1_3eklc")
+_settingsDatabase = ExtResource("4_hqr6m")
+
+[node name="EcsWorldProvider" type="Node" parent="Service"]
+script = ExtResource("2_osu0f")
+
+[node name="InputEventProvider" type="Node" parent="Service"]
+script = ExtResource("1_w3pdx")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("5_cpnmq")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.810675, 0.417239, -0.410752, 0.0330705, 0.667795, 0.74361, 0.584562, -0.61641, 0.527566, 0, 0, 0)
+sky_mode = 2
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Stair" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(3.47302e-08, 0, 1, 0, 1, 0, -1, 0, 2.3859e-08, 6.6419, -0.25, -3.5)
+material_override = ExtResource("7_ivpoi")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Floor" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13696, -0.5, 0)
+material_override = ExtResource("7_ll5xf")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(20, 1, 20)
+
+[node name="Ceil" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13696, 19.5, 0)
+material_override = ExtResource("7_ll5xf")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(20, 1, 20)
+
+[node name="Wall1" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 3.47302e-08, 1, 0, -1, 2.3859e-08, 1.13696, 9, -10.5)
+material_override = ExtResource("7_ll5xf")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(20, 1, 20)
+
+[node name="Wall2" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 3.47302e-08, 1, 0, -1, 2.3859e-08, 1.13696, 9, 8.5)
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(20, 1, 20)
+
+[node name="Wall5" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 3.47302e-08, 1, 0, -1, 2.3859e-08, 1.13696, 9, 8.5)
+material_override = ExtResource("7_ll5xf")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(20, 1, 20)
+
+[node name="Wall3" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 1, -2.3859e-08, 0, 3.47302e-08, 1, 1, 4.37114e-08, -2.68777e-16, 11.637, 9, 4.37114e-08)
+material_override = ExtResource("7_ll5xf")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(20, 1, 20)
+
+[node name="Wall4" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 1, -2.3859e-08, 0, 3.47302e-08, 1, 1, 4.37114e-08, -2.68777e-16, -7.36304, 9, 4.37114e-08)
+material_override = ExtResource("7_ll5xf")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(20, 1, 20)
+
+[node name="Light1" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 14.75, 4.25)
+light_color = Color(0.717647, 0.741176, 0.498039, 1)
+light_energy = 10.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 20.0
+
+[node name="Light2" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 14, -4.75)
+light_color = Color(0.839216, 0.796078, 0.956863, 1)
+light_energy = 10.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 20.0
+
+[node name="Stairs1" type="Node3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, -0.5, 7.5)
+
+[node name="Stair1" type="CSGBox3D" parent="Environment/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair2" type="CSGBox3D" parent="Environment/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.25, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair3" type="CSGBox3D" parent="Environment/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair4" type="CSGBox3D" parent="Environment/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.75, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair5" type="CSGBox3D" parent="Environment/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair6" type="CSGBox3D" parent="Environment/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.25, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair7" type="CSGBox3D" parent="Environment/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair8" type="CSGBox3D" parent="Environment/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.75, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair9" type="CSGBox3D" parent="Environment/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stairs2" type="Node3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.5, 7.5)
+
+[node name="Stair1" type="CSGBox3D" parent="Environment/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair2" type="CSGBox3D" parent="Environment/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair3" type="CSGBox3D" parent="Environment/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair4" type="CSGBox3D" parent="Environment/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair5" type="CSGBox3D" parent="Environment/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair6" type="CSGBox3D" parent="Environment/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair7" type="CSGBox3D" parent="Environment/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair8" type="CSGBox3D" parent="Environment/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair9" type="CSGBox3D" parent="Environment/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stairs3" type="Node3D" parent="Environment"]
+transform = Transform3D(3.47302e-08, 0, 1, 0, 1, 0, -1, 0, 2.3859e-08, 10.7, -0.5, -3.5)
+
+[node name="Stair1" type="CSGBox3D" parent="Environment/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, 1, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair2" type="CSGBox3D" parent="Environment/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.25, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair3" type="CSGBox3D" parent="Environment/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair4" type="CSGBox3D" parent="Environment/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.75, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair5" type="CSGBox3D" parent="Environment/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair6" type="CSGBox3D" parent="Environment/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.25, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair7" type="CSGBox3D" parent="Environment/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair8" type="CSGBox3D" parent="Environment/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.75, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair9" type="CSGBox3D" parent="Environment/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stairs4" type="Node3D" parent="Environment"]
+transform = Transform3D(3.47302e-08, 0, 1, 0, 1, 0, -1, 0, 2.3859e-08, 10.7, 1.75, -3.5)
+
+[node name="Stair1_up" type="CSGBox3D" parent="Environment/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair2_up" type="CSGBox3D" parent="Environment/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, 0)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair3_up" type="CSGBox3D" parent="Environment/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair4_up" type="CSGBox3D" parent="Environment/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair5_up" type="CSGBox3D" parent="Environment/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair6_up" type="CSGBox3D" parent="Environment/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.25, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair7_up" type="CSGBox3D" parent="Environment/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair8_up" type="CSGBox3D" parent="Environment/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.75, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair9_up" type="CSGBox3D" parent="Environment/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stairs5" type="Node3D" parent="Environment"]
+transform = Transform3D(0.866025, 0.5, 3.48787e-16, -0.5, 0.866025, -3.48787e-16, -4.76451e-16, 1.27665e-16, 1, 5.97798, -1.03814, -9.5)
+
+[node name="Stair1" type="CSGBox3D" parent="Environment/Stairs5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair2" type="CSGBox3D" parent="Environment/Stairs5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.25, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair3" type="CSGBox3D" parent="Environment/Stairs5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair4" type="CSGBox3D" parent="Environment/Stairs5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.75, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair5" type="CSGBox3D" parent="Environment/Stairs5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair6" type="CSGBox3D" parent="Environment/Stairs5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.25, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair7" type="CSGBox3D" parent="Environment/Stairs5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.5, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair8" type="CSGBox3D" parent="Environment/Stairs5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.75, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair9" type="CSGBox3D" parent="Environment/Stairs5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stairs6" type="Node3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.75, 1.5, -6.25)
+
+[node name="Stair1_up" type="CSGBox3D" parent="Environment/Stairs6"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 2, 0)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair2_up" type="CSGBox3D" parent="Environment/Stairs6"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 1.5, -1)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair1" type="CSGBox3D" parent="Environment/Stairs6"]
+transform = Transform3D(1, 0, 3.48787e-16, 0, 1, 0, -3.48787e-16, 0, 1, 0, 0, 2.08165e-12)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Stair2" type="CSGBox3D" parent="Environment/Stairs6"]
+transform = Transform3D(1, 0, 3.48787e-16, 0, 1, 0, -3.48787e-16, 0, 1, 0, 0, -1)
+material_override = ExtResource("8_sn7im")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="Slopes" type="Node3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="Slope15" type="CSGBox3D" parent="Environment/Slopes"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0.396297, 0.661762, 3)
+material_override = ExtResource("10_jgmh8")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(9.25, 1, 1)
+
+[node name="Slope30" type="CSGBox3D" parent="Environment/Slopes"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0.105445, 2.03873, 1.75)
+material_override = ExtResource("10_jgmh8")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(10.25, 1, 1)
+
+[node name="Slope45" type="CSGBox3D" parent="Environment/Slopes"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.064409, 3.73512, 0.5)
+material_override = ExtResource("10_jgmh8")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(12, 1, 1)
+
+[node name="Slope60" type="CSGBox3D" parent="Environment/Slopes"]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, -0.173348, 6.75912, -0.75)
+material_override = ExtResource("10_jgmh8")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(16.5, 1, 1)
+
+[node name="Slope75" type="CSGBox3D" parent="Environment/Slopes"]
+transform = Transform3D(0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0, 1, 0.933375, 9.41303, -2)
+material_override = ExtResource("10_jgmh8")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(20.25, 1, 1)
+
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("9_t6m6a")]
+transform = Transform3D(0.965926, -3.48787e-16, -0.258819, 2.4663e-16, 1, -4.27175e-16, 0.258819, 3.48787e-16, 0.965926, 8.25, 1.5, -6.75)
